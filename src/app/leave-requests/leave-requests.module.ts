@@ -2,10 +2,10 @@ import { IonicModule } from '@ionic/angular';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { Tab1Page } from './tab1.page';
 import { ExploreContainerComponentModule } from '../explore-container/explore-container.module';
 
-import { Tab1PageRoutingModule } from './tab1-routing.module';
+import { LeaveRequestsPageRoutingModule } from './leave-requests-routing.module';
+import { LeaveRequestsPage } from './leave-requests.page';
 
 @NgModule({
   imports: [
@@ -13,8 +13,8 @@ import { Tab1PageRoutingModule } from './tab1-routing.module';
     CommonModule,
     FormsModule,
     ExploreContainerComponentModule,
-    Tab1PageRoutingModule
+    LeaveRequestsPageRoutingModule,
   ],
-  declarations: [Tab1Page]
+  declarations: [LeaveRequestsPage],
 })
-export class Tab1PageModule {}
+export class LeaveRequestsPageModule {}

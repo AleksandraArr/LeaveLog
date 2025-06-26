@@ -1,0 +1,51 @@
+:host {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.user-avatar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+
+  .user {
+    position: relative;
+  }
+
+  img {
+    object-fit: cover;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    vertical-align: bottom;
+
+    &.has-border {
+      border: 5px solid var(--primaryColor);
+    }
+  }
+
+  .name {
+    border-radius: 50%;
+    min-width: 40px;
+    min-height: 40px;
+    max-width: 40px;
+    max-height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-transform: uppercase;
+    background-color: var(--avatarBackground);
+    color: var(--textColor);
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 20px;
+
+    .mat-icon {
+      height: 40px;
+      width: 40px;
+      font-size: 40px;
+    }
+  }
+}

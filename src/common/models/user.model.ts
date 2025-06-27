@@ -17,15 +17,10 @@ export function UserTypeToString(userType: UserType): string {
 export enum UserPosition {
   None,
   CEO,
-  CTO,
   ProjectManager,
-  HumanResources,
   BackendDeveloper,
   FrontendDeveloper,
-  DevOps,
   QA,
-  Designer,
-  CustomerSupport,
 }
 
 export function UserPositionToString(value: UserPosition): string {
@@ -34,22 +29,14 @@ export function UserPositionToString(value: UserPosition): string {
       return 'None';
     case UserPosition.CEO:
       return 'CEO';
-    case UserPosition.CTO:
-      return 'CTO';
     case UserPosition.ProjectManager:
       return 'Project Manager';
-    case UserPosition.HumanResources:
-      return 'Human Resources';
     case UserPosition.BackendDeveloper:
       return 'Backend Developer';
     case UserPosition.FrontendDeveloper:
       return 'Frontend Developer';
     case UserPosition.QA:
       return 'QA';
-    case UserPosition.DevOps:
-      return 'DevOps';
-    case UserPosition.CustomerSupport:
-      return 'Customer Support';
     default:
       return 'Unknown position';
   }

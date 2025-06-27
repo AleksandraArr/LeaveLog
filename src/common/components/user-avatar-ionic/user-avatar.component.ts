@@ -1,17 +1,12 @@
 import { Component, EventEmitter, Input, Output, inject } from '@angular/core';
 
 @Component({
-  selector: 'me-user-avatar',
+  selector: 'user-avatar',
   templateUrl: './user-avatar.component.html',
   styleUrls: ['./user-avatar.component.scss'],
   standalone: false,
 })
 export class UserAvatarComponent {
-  //public user: User | null = null;
-  //@Input('user') set setUser(user: User | null) {
-  //	this.user = user;
-  //}
-
   public userName: string = '';
   @Input('userName') set setUserName(userName: string) {
     this.userName = userName;
@@ -30,13 +25,6 @@ export class UserAvatarComponent {
   @Input() public backgroundColor: string = '';
   @Input() public color: string = '';
   @Input() public avatarClass: string = '';
-  @Input() public useIdenticon: boolean = true;
-  @Input() public canEdit: boolean = false;
-  @Input() public canDelete: boolean = false;
-  @Input() public hasBorder: boolean = false;
-  @Output('remove') public remove: EventEmitter<void> =
-    new EventEmitter<void>();
-  @Output('edit') public edit: EventEmitter<void> = new EventEmitter<void>();
 
   constructor() {}
 

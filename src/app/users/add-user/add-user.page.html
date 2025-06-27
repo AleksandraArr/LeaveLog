@@ -1,0 +1,59 @@
+<app-header title="Add user"></app-header>
+
+<ion-content [fullscreen]="true">
+  <ion-content [fullscreen]="true">
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title>Details of the user </ion-card-title>
+      </ion-card-header>
+
+      <ion-card-content>
+        <ion-list>
+          <ion-item>
+            <ion-input
+              label="First name"
+              labelPlacement="floating"
+              placeholder="Enter first name"
+            ></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-input
+              label="Last name"
+              labelPlacement="floating"
+              placeholder="Enter last name"
+            ></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-input
+              label="Email"
+              labelPlacement="floating"
+              placeholder="Enter email"
+            ></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-select aria-label="tyoe" label="Role">
+              <ion-select-option value="admin">Admin</ion-select-option>
+              <ion-select-option value="user">User</ion-select-option>
+            </ion-select>
+          </ion-item>
+          <ion-item>
+            <ion-select aria-label="position" label="Position">
+              <ion-select-option value="CEO">CEO</ion-select-option>
+              <ion-select-option value="ProjectManager"
+                >Project Manager</ion-select-option
+              >
+              <ion-select-option value="BackendDeveloper"
+                >Backend Developer</ion-select-option
+              >
+              <ion-select-option value="FrontendDeveloper"
+                >Frontend Developer</ion-select-option
+              >
+              <ion-select-option value="QA">QA</ion-select-option>
+            </ion-select>
+          </ion-item>
+        </ion-list>
+      </ion-card-content>
+    </ion-card>
+    <ion-button shape="round">Add user</ion-button>
+  </ion-content>
+</ion-content>

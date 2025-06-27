@@ -10,7 +10,7 @@ const routes: Routes = [
       {
         path: 'users',
         loadChildren: () =>
-          import('../users/users').then((m) => m.UsersPageModule),
+          import('../users/users.module').then((m) => m.UsersPageModule),
       },
       {
         path: 'leave-requests',

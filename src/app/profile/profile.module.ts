@@ -7,7 +7,7 @@ import { ExploreContainerComponentModule } from '../explore-container/explore-co
 
 import { ProfilePageRoutingModule } from './profile-routing.module';
 import { PipesModule } from 'src/common/pipes/pipes.module';
-import { UserAvatarModule } from 'src/common/components/user-avatar/user-avatar.module';
+import { ComponentsModule } from 'src/common/components/components.module';
 
 @NgModule({
   imports: [
@@ -17,7 +17,7 @@ import { UserAvatarModule } from 'src/common/components/user-avatar/user-avatar.
     ExploreContainerComponentModule,
     ProfilePageRoutingModule,
     PipesModule,
-    UserAvatarModule,
+    ComponentsModule,
   ],
   declarations: [ProfilePage],
 })

@@ -1,0 +1,9 @@
+<ion-avatar class="user-avatar">
+  <!-- Prikaz slike ako postoji -->
+  <img *ngIf="imageSrc" [src]="imageSrc" alt="User avatar" />
+
+  <!-- Prikaz inicijala ako nema slike -->
+  <div *ngIf="!imageSrc" class="initials-avatar" [class]="avatarClass">
+    <span *ngIf="userName">{{ userName | getInitials }}</span>
+  </div>
+</ion-avatar>

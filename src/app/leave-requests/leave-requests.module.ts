@@ -6,6 +6,7 @@ import { ExploreContainerComponentModule } from '../explore-container/explore-co
 
 import { LeaveRequestsPageRoutingModule } from './leave-requests-routing.module';
 import { LeaveRequestsPage } from './leave-requests.page';
+import { ComponentsModule } from 'src/common/components/components.module';
 
 @NgModule({
   imports: [
@@ -14,6 +15,7 @@ import { LeaveRequestsPage } from './leave-requests.page';
     FormsModule,
     ExploreContainerComponentModule,
     LeaveRequestsPageRoutingModule,
+    ComponentsModule,
   ],
   declarations: [LeaveRequestsPage],
 })

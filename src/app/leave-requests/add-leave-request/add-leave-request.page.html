@@ -1,0 +1,76 @@
+<app-header title="Add leave request" back="leave-requests"></app-header>
+
+<ion-content [fullscreen]="true">
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Details of the leave request</ion-card-title>
+    </ion-card-header>
+
+    <ion-card-content>
+      <ion-list>
+        <ion-item>
+          <ion-select aria-label="leaveType" label="Leave type">
+            <ion-select-option
+              *ngFor="let leaveType of leaveTypes"
+              [value]="leaveType.Id"
+            >
+              {{ leaveType.Name }}
+            </ion-select-option>
+          </ion-select>
+        </ion-item>
+        <ion-item>
+          <ion-label>Date from</ion-label>
+          <ion-datetime-button datetime="datetime"></ion-datetime-button>
+
+          <ion-modal [keepContentsMounted]="true">
+            <ng-template>
+              <ion-datetime
+                id="datetime"
+                presentation="date"
+                value="2023-11-02"
+                locale="sr-Latn-RS"
+                [formatOptions]="{
+                date: {
+                  weekday: 'short',
+                  month: 'long',
+                  day: '2-digit',
+                }
+              }"
+              ></ion-datetime>
+            </ng-template>
+          </ion-modal>
+        </ion-item>
+        <ion-item>
+          <ion-label>Date to</ion-label>
+          <ion-datetime-button datetime="datetime"></ion-datetime-button>
+
+          <ion-modal [keepContentsMounted]="true">
+            <ng-template>
+              <ion-datetime
+                id="datetime"
+                presentation="date"
+                value="2023-11-02"
+                locale="sr-Latn-RS"
+                [formatOptions]="{
+                date: {
+                  weekday: 'short',
+                  month: 'long',
+                  day: '2-digit',
+                }
+              }"
+              ></ion-datetime>
+            </ng-template>
+          </ion-modal>
+        </ion-item>
+        <ion-item>
+          <ion-textarea
+            labelPlacement="floating"
+            label="Description"
+            placeholder="Enter description"
+          ></ion-textarea>
+        </ion-item>
+      </ion-list>
+    </ion-card-content>
+  </ion-card>
+  <ion-button shape="round">Add request</ion-button>
+</ion-content>

@@ -1,4 +1,12 @@
 <app-header title="All leave requests"></app-header>
 <ion-content [fullscreen]="true">
-  <app-explore-container name="Tab 1 page"></app-explore-container>
+  <ion-button shape="round" routerLink="add-leave-request"
+    >Add request</ion-button
+  >
+  <div *ngFor="let leaveRequest of leaveRequests">
+    <app-leave-request
+      [leaveRequest]="leaveRequest"
+      (clicked)="navigateToRequest(leaveRequest.Id)"
+    ></app-leave-request>
+  </div>
 </ion-content>

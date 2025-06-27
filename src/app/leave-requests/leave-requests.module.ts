@@ -7,6 +7,7 @@ import { ExploreContainerComponentModule } from '../explore-container/explore-co
 import { LeaveRequestsPageRoutingModule } from './leave-requests-routing.module';
 import { LeaveRequestsPage } from './leave-requests.page';
 import { ComponentsModule } from 'src/common/components/components.module';
+import { ResolversModule } from 'src/common/resolvers/resolvers.module';
 
 @NgModule({
   imports: [
@@ -16,6 +17,7 @@ import { ComponentsModule } from 'src/common/components/components.module';
     ExploreContainerComponentModule,
     LeaveRequestsPageRoutingModule,
     ComponentsModule,
+    ResolversModule,
   ],
   declarations: [LeaveRequestsPage],
 })

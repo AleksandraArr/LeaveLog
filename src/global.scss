@@ -44,8 +44,7 @@ ion-button {
   --padding-end: 24px;
   margin: 16px;
   width: 180px;
-  font-weight: bold;
-  text-transform: uppercase;
+  letter-spacing: 1.5px;
   --background: #3e5879;
   --background-activated: #213555;
 }
@@ -54,14 +53,27 @@ ion-toolbar {
 }
 ion-toolbar ion-title {
   height: 60px;
-  text-align: left;
-  padding-left: 16px;
+  text-align: center;
   line-height: 40px;
   font-size: 1.5rem;
+}
+ion-back-button {
+  height: 60px;
 }
 ion-select {
   height: 56px;
 }
 ion-input {
   height: 56px;
+}
+ion-datetime-button {
+  height: 56px;
+}
+h1 {
+  color: white;
+  font-size: 40px;
+}
+ion-item {
+  padding: 0px;
+  padding-right: 16px;
 }

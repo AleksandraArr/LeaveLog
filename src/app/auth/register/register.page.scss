@@ -1,0 +1,21 @@
+.background-image {
+  --background: url("/assets/images/background.jpg") no-repeat center center /
+    cover;
+}
+h1 {
+  margin: 40px 40px 20px 40px;
+}
+h2 {
+  margin: 0px 40px;
+  color: white !important;
+}
+ion-button {
+  margin: 16px 16px 10px 16px;
+  width: 90% !important;
+}
+ion-text {
+  margin: 0px 16px;
+}
+ion-card {
+  margin-top: 1vh;
+}

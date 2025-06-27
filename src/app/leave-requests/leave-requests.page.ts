@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
+import { Router } from '@angular/router';
+import { LeaveRequest, Status } from 'src/common/models/leave-request.model';
 
 @Component({
   selector: 'app-leave-requests',
@@ -7,5 +9,47 @@ import { Component } from '@angular/core';
   standalone: false,
 })
 export class LeaveRequestsPage {
+  private router = inject(Router);
+  leaveRequests: LeaveRequest[] = [
+    new LeaveRequest(
+      1,
+      1,
+      '2023-05-10',
+      '2023-05-15',
+      'Godišnji odmor',
+      'Planiram putovanje',
+      Status.Approved,
+      5,
+      1,
+      101
+    ),
+    new LeaveRequest(
+      2,
+      2,
+      '2023-06-01',
+      '2023-06-03',
+      'Bolovanje',
+      'Prehlada',
+      Status.Pending,
+      2,
+      2,
+      102
+    ),
+    new LeaveRequest(
+      3,
+      1,
+      '2023-07-20',
+      '2023-07-25',
+      'Odmor',
+      'Porodične obaveze',
+      Status.Rejected,
+      5,
+      3,
+      103
+    ),
+  ];
   constructor() {}
+  navigateToRequest(id: number) {
+    this.router.navigate(['tabs/leave-requests', id]);
+  }
 }

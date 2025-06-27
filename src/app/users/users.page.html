@@ -2,5 +2,7 @@
 
 <ion-content [fullscreen]="true">
   <ion-button shape="round" routerLink="add-user">Add user</ion-button>
-  <app-explore-container name="Tab 3 page"></app-explore-container>
+  <div *ngFor="let user of users">
+    <app-user-info [user]="user"></app-user-info>
+  </div>
 </ion-content>

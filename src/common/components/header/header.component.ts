@@ -7,5 +7,6 @@ import { Component, Input } from '@angular/core';
   standalone: false,
 })
 export class HeaderComponent {
-  @Input() title: string = '';
+  @Input() title: string | null = null;
+  @Input() back: string = '';
 }

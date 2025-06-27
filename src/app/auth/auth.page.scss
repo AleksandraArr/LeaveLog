@@ -1,0 +1,34 @@
+.background-image {
+  --background: url("/assets/images/background.jpg") no-repeat center center /
+    cover;
+}
+.opacity-button {
+  background-color: rgba(33, 53, 85, 0.6);
+  border-radius: 20px;
+}
+.register-button {
+  margin-top: 5px;
+}
+ion-text {
+  margin: 20px;
+}
+ion-button {
+  margin: 0px 20px;
+  width: 100% !important;
+}
+ion-card-title {
+  color: white !important;
+  font-size: 45px;
+}
+ion-card-subtitle {
+  color: white !important;
+  font-size: 20px;
+  margin-top: 10px;
+}
+ion-card-content {
+  margin-top: 20vh;
+  display: flex;
+  flex-direction: column;
+  justify-items: center;
+  align-items: center;
+}

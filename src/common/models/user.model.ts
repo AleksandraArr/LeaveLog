@@ -11,7 +11,7 @@ export function UserTypeToString(userType: UserType): string {
     case UserType.Admin:
       return 'Admin';
     case UserType.User:
-      return 'Zaposleni';
+      return 'User';
   }
 }
 export enum UserPosition {
@@ -50,12 +50,12 @@ export class User {
   UserPosition: UserPosition;
 
   constructor(
-    public id: number,
-    public firstName: string,
-    public lastName: string,
-    public email: string,
-    public userType: UserType,
-    public userPosition: UserPosition
+    public id: number = 0,
+    public firstName: string = '',
+    public lastName: string = '',
+    public email: string = '',
+    public userType: UserType = UserType.None,
+    public userPosition: UserPosition = UserPosition.None
   ) {
     this.Id = id;
     this.FirstName = firstName;

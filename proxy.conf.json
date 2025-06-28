@@ -1,0 +1,20 @@
+{
+  "identity": {
+    "target": "http://localhost:9601",
+    "secure": false,
+    "changeOrigin": true,
+    "logLevel": "debug",
+    "pathRewrite": {
+      "^/identity": "/api/v1"
+    }
+  },
+  "people": {
+    "target": "http://localhost:9602",
+    "secure": false,
+    "changeOrigin": true,
+    "logLevel": "debug",
+    "pathRewrite": {
+      "^/people": "/api/v1"
+    }
+  }
+}

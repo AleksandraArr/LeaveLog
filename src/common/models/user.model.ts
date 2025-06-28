@@ -50,12 +50,12 @@ export class User {
   UserPosition: UserPosition;
 
   constructor(
-    public id: number = 0,
-    public firstName: string = '',
-    public lastName: string = '',
-    public email: string = '',
-    public userType: UserType = UserType.None,
-    public userPosition: UserPosition = UserPosition.None
+    id: number = 0,
+    firstName: string = '',
+    lastName: string = '',
+    email: string = '',
+    userType: UserType = UserType.None,
+    userPosition: UserPosition = UserPosition.None
   ) {
     this.Id = id;
     this.FirstName = firstName;

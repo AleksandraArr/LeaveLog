@@ -12,7 +12,7 @@ export class LeaveRequestsPage {
   private router = inject(Router);
   leaveRequests: LeaveRequest[] = [
     new LeaveRequest(
-      1,
+      371,
       1,
       '2023-05-10',
       '2023-05-15',
@@ -24,7 +24,7 @@ export class LeaveRequestsPage {
       101
     ),
     new LeaveRequest(
-      2,
+      372,
       2,
       '2023-06-01',
       '2023-06-03',
@@ -36,7 +36,7 @@ export class LeaveRequestsPage {
       102
     ),
     new LeaveRequest(
-      3,
+      373,
       1,
       '2023-07-20',
       '2023-07-25',
@@ -50,6 +50,6 @@ export class LeaveRequestsPage {
   ];
   constructor() {}
   navigateToRequest(id: number) {
-    this.router.navigate(['tabs/leave-requests', id]);
+    this.router.navigate(['leave-requests', id]);
   }
 }

@@ -3,71 +3,73 @@
     <h1>Register</h1>
     <h2><i>Create your new account</i></h2>
   </ion-text>
-  <ion-card>
-    <ion-card-content>
-      <ion-list>
-        <ion-item>
-          <ion-input
-            placeholder="Enter first name"
-            labelPlacement="floating"
-            label="First name"
-          ></ion-input>
-        </ion-item>
-        <ion-item>
-          <ion-input
-            placeholder="Enter last name"
-            labelPlacement="floating"
-            label="Last name"
-          ></ion-input>
-        </ion-item>
-        <ion-item>
-          <ion-select aria-label="tyoe" label="Role">
-            <ion-select-option value="admin">Admin</ion-select-option>
-            <ion-select-option value="user">User</ion-select-option>
-          </ion-select>
-        </ion-item>
-        <ion-item>
-          <ion-select aria-label="position" label="Position">
-            <ion-select-option value="CEO">CEO</ion-select-option>
-            <ion-select-option value="ProjectManager"
-              >Project Manager</ion-select-option
-            >
-            <ion-select-option value="BackendDeveloper"
-              >Backend Developer</ion-select-option
-            >
-            <ion-select-option value="FrontendDeveloper"
-              >Frontend Developer</ion-select-option
-            >
-            <ion-select-option value="QA">QA</ion-select-option>
-          </ion-select>
-        </ion-item>
-        <ion-item>
-          <ion-input
-            label="Enter email"
-            labelPlacement="floating"
-            label="Email"
-          ></ion-input>
-        </ion-item>
 
-        <ion-item>
-          <ion-input type="password" placeholder="Enter password">
-            <ion-input-password-toggle slot="end"></ion-input-password-toggle>
-          </ion-input>
-        </ion-item>
-        <ion-item>
-          <ion-input type="password" placeholder="Confirm password">
-            <ion-input-password-toggle slot="end"></ion-input-password-toggle>
-          </ion-input>
-        </ion-item>
-      </ion-list>
-      <ion-grid>
-        <ion-row>
-          <ion-button shape="round">Register</ion-button>
-        </ion-row>
-        <ion-row class="ion-justify-content-center">
-          <ion-text routerLink="/auth/login">Already have an account?</ion-text>
-        </ion-row>
-      </ion-grid>
-    </ion-card-content>
-  </ion-card>
+  <form class="form" [formGroup]="formGroup" (ngSubmit)="onSubmit()">
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title>Details of the user </ion-card-title>
+      </ion-card-header>
+
+      <ion-card-content>
+        <ion-list>
+          <ion-item>
+            <ion-input
+              label="First name"
+              labelPlacement="floating"
+              placeholder="Enter first name"
+              [formControl]="formGroupControls.FirstName"
+            ></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-input
+              label="Last name"
+              labelPlacement="floating"
+              placeholder="Enter last name"
+              [formControl]="formGroupControls.LastName"
+            ></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-input
+              label="Email"
+              labelPlacement="floating"
+              placeholder="Enter email"
+              [formControl]="formGroupControls.Email"
+            ></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-select
+              aria-label="tyoe"
+              label="Role"
+              [formControl]="formGroupControls.UserType"
+            >
+              <ion-select-option value="admin">Admin</ion-select-option>
+              <ion-select-option value="user">User</ion-select-option>
+            </ion-select>
+          </ion-item>
+          <ion-item>
+            <ion-select
+              aria-label="position"
+              label="Position"
+              [formControl]="formGroupControls.UserPosition"
+            >
+              <ion-select-option value="CEO">CEO</ion-select-option>
+              <ion-select-option value="ProjectManager"
+                >Project Manager</ion-select-option
+              >
+              <ion-select-option value="BackendDeveloper"
+                >Backend Developer</ion-select-option
+              >
+              <ion-select-option value="FrontendDeveloper"
+                >Frontend Developer</ion-select-option
+              >
+              <ion-select-option value="QA">QA</ion-select-option>
+            </ion-select>
+          </ion-item>
+        </ion-list>
+      </ion-card-content>
+    </ion-card>
+    <ion-button shape="round" type="submit" [disabled]="!canSubmit"
+      >Add user</ion-button
+    >
+  </form>
 </ion-content>

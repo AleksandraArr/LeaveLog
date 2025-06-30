@@ -7,6 +7,9 @@ import {
   StatusToString,
 } from 'src/common/models/leave-request.model';
 import { ConnectedDays, LeaveType } from 'src/common/models/leave-type.model';
+import { LeaveRequestApiService } from 'src/common/services/leave-request-api.service';
+import { LeaveTypeApiService } from 'src/common/services/leave-type-api.service';
+import { ToastService } from 'src/common/services/toast.service';
 
 @Component({
   selector: 'app-leave-request-edit',
@@ -16,12 +19,15 @@ import { ConnectedDays, LeaveType } from 'src/common/models/leave-type.model';
 })
 export class LeaveRequestEditPage implements OnInit {
   leaveRequest: LeaveRequest = new LeaveRequest();
-  leaveTypes: LeaveType[] = [
-    new LeaveType(1, 'Sick day', ConnectedDays.SickDay, 0, 2),
-    new LeaveType(2, 'Vacation', ConnectedDays.VacationDay, 20, 10),
-    new LeaveType(3, 'Personal day', ConnectedDays.VacationDay, 3, 5),
-  ];
-  constructor(private activatedRoute: ActivatedRoute) {}
+  leaveTypes: LeaveType[] = [];
+  constructor(
+    private activatedRoute: ActivatedRoute,
+    private leaveTypeApiService: LeaveTypeApiService,
+    private leaveRequestApiService: LeaveRequestApiService,
+    private toastService: ToastService
+  ) {
+    this.loadLeaveTypes();
+  }
 
   ngOnInit() {}
   ngAfterViewInit(): void {
@@ -46,6 +52,20 @@ export class LeaveRequestEditPage implements OnInit {
     this.leaveRequest.Description = this.formGroupControls.Description.value!;
     this.leaveRequest.DateFrom = this.formGroupControls.DateFrom.value!;
     this.leaveRequest.DateTo = this.formGroupControls.DateTo.value!;
+    try {
+      const createdRequest = await this.leaveRequestApiService.update(
+        this.leaveRequest
+      );
+      this.toastService.presentToast(
+        'Leave request succesfully created',
+        'success'
+      );
+    } catch (error) {
+      this.toastService.presentToast(
+        'Error while creating leave request.',
+        'danger'
+      );
+    }
   }
   private initForm(): void {
     if (this.leaveRequest) {
@@ -57,6 +77,14 @@ export class LeaveRequestEditPage implements OnInit {
         this.leaveRequest.Description
       );
       this.formGroupControls.DateTo.setValue(this.leaveRequest.DateTo);
+    }
+  }
+  async loadLeaveTypes() {
+    try {
+      const leaveTypes = await this.leaveTypeApiService.getAll();
+      this.leaveTypes = leaveTypes;
+    } catch (error) {
+      console.error('Error loading leave types', error);
     }
   }
 }

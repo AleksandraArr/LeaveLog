@@ -77,3 +77,19 @@ ion-item {
   padding: 0px;
   padding-right: 16px;
 }
+
+.md .tabs-bottom {
+  transform: translateY(-56px) !important;
+}
+.ios .tabs-bottom {
+  transform: translateY(-50px) !important;
+}
+.md .header-top {
+  top: 56px !important;
+}
+.ios .header-top {
+  top: 44px !important;
+}
+.custom-toast {
+  color: (--ion-color-white);
+}

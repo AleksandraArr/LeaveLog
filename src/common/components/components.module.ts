@@ -6,6 +6,7 @@ import { IonicModule } from '@ionic/angular';
 import { PipesModule } from '../pipes/pipes.module';
 import { UserInfoComponent } from './user-info/user-info.component';
 import { LeaveRequestComponent } from './leave-request/leave-request.component';
+import { ServicesModule } from '../services/services.module';
 
 @NgModule({
   declarations: [
@@ -14,7 +15,7 @@ import { LeaveRequestComponent } from './leave-request/leave-request.component';
     UserInfoComponent,
     LeaveRequestComponent,
   ],
-  imports: [CommonModule, IonicModule, PipesModule],
+  imports: [CommonModule, IonicModule, PipesModule, ServicesModule],
   exports: [
     HeaderComponent,
     UserAvatarComponent,

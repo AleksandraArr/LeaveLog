@@ -1,7 +1,11 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { LeaveRequest } from 'src/common/models/leave-request.model';
-import { ConnectedDays, LeaveType } from 'src/common/models/leave-type.model';
-import { User, UserPosition, UserType } from 'src/common/models/user.model';
+import { LeaveType } from 'src/common/models/leave-type.model';
+import { User } from 'src/common/models/user.model';
+import { LeaveRequestApiService } from 'src/common/services/leave-request-api.service';
+import { LeaveTypeApiService } from 'src/common/services/leave-type-api.service';
+import { ToastService } from 'src/common/services/toast.service';
+import { UserApiService } from 'src/common/services/user-api.service';
 
 @Component({
   selector: 'app-leave-request',
@@ -12,41 +16,20 @@ import { User, UserPosition, UserType } from 'src/common/models/user.model';
 export class LeaveRequestComponent {
   @Input() leaveRequest: LeaveRequest = new LeaveRequest();
   @Output() clicked = new EventEmitter<number>();
-
+  constructor(
+    private leaveRequestApiService: LeaveRequestApiService,
+    private leaveTypeApiService: LeaveTypeApiService,
+    private userApiService: UserApiService,
+    private toastService: ToastService
+  ) {
+    this.loadLeaveTypes();
+    this.loadUsers();
+  }
   onClick() {
     this.clicked.emit(this.leaveRequest.Id);
   }
-  leaveTypes: LeaveType[] = [
-    new LeaveType(1, 'Sick day', ConnectedDays.SickDay, 0, 2),
-    new LeaveType(2, 'Vacation', ConnectedDays.VacationDay, 20, 10),
-    new LeaveType(3, 'Personal day', ConnectedDays.VacationDay, 3, 5),
-  ];
-  users: User[] = [
-    new User(
-      1,
-      'Aleksandra',
-      'Rakovic',
-      'aleksandra.rakovic21@gmail.com',
-      UserType.Admin,
-      UserPosition.ProjectManager
-    ),
-    new User(
-      2,
-      'Lucas',
-      'van der Vat',
-      'lucasvdvat@gmail.com',
-      UserType.User,
-      UserPosition.CEO
-    ),
-    new User(
-      3,
-      'Milena',
-      'Sretenovic',
-      'ms2021@gmail.com',
-      UserType.User,
-      UserPosition.CEO
-    ),
-  ];
+  leaveTypes: LeaveType[] = [];
+  users: User[] = [];
   public alertButtons = [
     {
       text: 'No',
@@ -55,6 +38,41 @@ export class LeaveRequestComponent {
     {
       text: 'Yes',
       cssClass: 'alert-button-confirm',
+      handler: () => {
+        this.onConfirmDelete();
+      },
     },
   ];
+  onConfirmDelete() {
+    this.leaveRequestApiService.delete(this.leaveRequest.Id).subscribe({
+      next: () => {
+        this.toastService.presentToast(
+          'Leave request deleted successfully.',
+          'success'
+        );
+      },
+      error: (err) => {
+        this.toastService.presentToast(
+          'Error while deleting eave request',
+          'danger'
+        );
+      },
+    });
+  }
+  async loadLeaveTypes() {
+    try {
+      const leaveTypes = await this.leaveTypeApiService.getAll();
+      this.leaveTypes = leaveTypes;
+    } catch (error) {
+      console.error('Error loading leave types', error);
+    }
+  }
+  async loadUsers() {
+    try {
+      const users = await this.userApiService.getAll();
+      this.users = users;
+    } catch (error) {
+      console.error('Error loading users', error);
+    }
+  }
 }

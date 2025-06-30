@@ -41,6 +41,26 @@ export function UserPositionToString(value: UserPosition): string {
       return 'Unknown position';
   }
 }
+export function UserErrorCodeToMessage(errorCode: string): string {
+  switch (errorCode) {
+    case 'user_not_found':
+      return 'User does not exist.';
+    case 'user_not_employee':
+      return 'User is not an employee.';
+    case 'email_invalid':
+      return 'Email does not exist.';
+    case 'email_not_confirmed':
+      return 'Email address is not confirmed. Please check your inbox.';
+    case 'password_invalid':
+      return 'Invalid password.';
+    case 'user_deactivated':
+      return 'Invalid credentials.';
+    case 'invalid_credentials':
+      return 'Invalid credentials.';
+    default:
+      return 'An error occurred. Please try again.';
+  }
+}
 export class User {
   Id: number;
   FirstName: string;

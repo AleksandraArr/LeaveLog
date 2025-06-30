@@ -8,6 +8,7 @@ import { AddLeaveRequestPageRoutingModule } from './add-leave-request-routing.mo
 
 import { AddLeaveRequestPage } from './add-leave-request.page';
 import { ComponentsModule } from 'src/common/components/components.module';
+import { ServicesModule } from 'src/common/services/services.module';
 
 @NgModule({
   imports: [
@@ -17,6 +18,7 @@ import { ComponentsModule } from 'src/common/components/components.module';
     IonicModule,
     ComponentsModule,
     AddLeaveRequestPageRoutingModule,
+    ServicesModule
   ],
   declarations: [AddLeaveRequestPage],
 })

@@ -4,9 +4,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
-import { LoginPageRoutingModule } from './login-routing.module';
+import { SetPasswordPageRoutingModule } from './set-password-routing.module';
 
-import { LoginPage } from './login.page';
+import { SetPasswordPage } from './set-password.page';
 import { ServicesModule } from 'src/common/services/services.module';
 
 @NgModule({
@@ -15,9 +15,9 @@ import { ServicesModule } from 'src/common/services/services.module';
     FormsModule,
     ReactiveFormsModule,
     IonicModule,
-    LoginPageRoutingModule,
+    SetPasswordPageRoutingModule,
     ServicesModule,
   ],
-  declarations: [LoginPage],
+  declarations: [SetPasswordPage],
 })
-export class LoginPageModule {}
+export class SetPasswordPageModule {}

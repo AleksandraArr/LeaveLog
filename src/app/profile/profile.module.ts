@@ -8,6 +8,7 @@ import { ExploreContainerComponentModule } from '../explore-container/explore-co
 import { ProfilePageRoutingModule } from './profile-routing.module';
 import { PipesModule } from 'src/common/pipes/pipes.module';
 import { ComponentsModule } from 'src/common/components/components.module';
+import { ServicesModule } from 'src/common/services/services.module';
 
 @NgModule({
   imports: [
@@ -18,6 +19,7 @@ import { ComponentsModule } from 'src/common/components/components.module';
     ProfilePageRoutingModule,
     PipesModule,
     ComponentsModule,
+    ServicesModule,
   ],
   declarations: [ProfilePage],
 })

@@ -15,6 +15,13 @@ const routes: Routes = [
       import('./register/register.module').then((m) => m.RegisterPageModule),
   },
   {
+    path: 'password-setup',
+    loadChildren: () =>
+      import('./set-password/set-password.module').then(
+        (m) => m.SetPasswordPageModule
+      ),
+  },
+  {
     path: '',
     component: AuthPage,
   },

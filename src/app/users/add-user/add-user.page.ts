@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { User, UserPosition, UserType } from 'src/common/models/user.model';
+import { ToastService } from 'src/common/services/toast.service';
+import { UserApiService } from 'src/common/services/user-api.service';
 
 @Component({
   selector: 'app-add-user',
@@ -26,7 +28,10 @@ export class AddUserPage implements OnInit {
     ),
   };
   public formGroup = new FormGroup(this.formGroupControls);
-  constructor() {}
+  constructor(
+    private userApiService: UserApiService,
+    private toastService: ToastService
+  ) {}
 
   ngOnInit() {}
 
@@ -40,5 +45,11 @@ export class AddUserPage implements OnInit {
     this.user.UserPosition = this.formGroupControls.UserPosition.value!;
     this.user.UserType = this.formGroupControls.UserType.value!;
     console.log(this.user);
+    try {
+      const createdUser = await this.userApiService.create(this.user);
+      this.toastService.presentToast('User succesfully created.', 'success');
+    } catch (error) {
+      this.toastService.presentToast('Error while creating user.', 'danger');
+    }
   }
 }

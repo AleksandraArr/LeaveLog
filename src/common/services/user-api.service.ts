@@ -4,20 +4,8 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { firstValueFrom, from, map, Observable, switchMap } from 'rxjs';
 import { LeaveRequest, Status } from '../models/leave-request.model';
 import { AuthService } from './auth.service';
-import { UserApiService } from './user-api.service';
+import { User } from '../models/user.model';
 
-export interface ILeaveRequest {
-  Id?: number;
-  LeaveTypeId: number;
-  CreatedBy: number;
-  UpdatedBy: number;
-  DateFrom: string;
-  DateTo: string;
-  Description: string;
-  Comment?: string;
-  DayCount?: number;
-  Status: Status;
-}
 export interface ApiResponse<T> {
   Data: T;
   Status: number;
@@ -25,20 +13,15 @@ export interface ApiResponse<T> {
 }
 
 @Injectable()
-export class LeaveRequestApiService {
-  private apiUrl = 'http://localhost:9602/api/v1/LeaveRequests';
+export class UserApiService {
+  private apiUrl = 'http://localhost:9601/api/v1/Users';
   token: string = '';
-  constructor(
-    private http: HttpClient,
-    private authService: AuthService,
-    private userApiService: UserApiService
-  ) {
+  constructor(private http: HttpClient, private authService: AuthService) {
     this.authService.loadToken();
   }
   // Get all leave requests
-  async getAll(): Promise<LeaveRequest[]> {
+  async getAll(): Promise<User[]> {
     const token = await this.authService.getToken();
-    const user = await this.userApiService.getCurrentUser();
     const headers = new HttpHeaders({
       Authorization: `Bearer ${token}`,
     });
@@ -46,19 +29,12 @@ export class LeaveRequestApiService {
       PageSize: 0,
       PageNumber: 0,
       StartIndex: 0,
-      Filters: [
-        {
-          Op: 1,
-          Field: 'CreatedBy',
-          Value: user.Id,
-        },
-      ],
     };
 
     return firstValueFrom(
       this.http
         .post<{
-          Data: { Items: LeaveRequest[]; TotalItems: number };
+          Data: { Items: User[]; TotalItems: number };
           Status: number;
           Errors: any[];
         }>(`${this.apiUrl}/Search`, body, { headers })
@@ -76,37 +52,30 @@ export class LeaveRequestApiService {
       .pipe(map((response) => response.Data));
   }
 
-  // Create new leave request
-  async create(request: LeaveRequest): Promise<LeaveRequest> {
+  //Get current logged in user
+  async getCurrentUser(): Promise<User> {
+    const token = await this.authService.getToken();
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${token}`,
+    });
+
+    return firstValueFrom(
+      this.http
+        .get<ApiResponse<User>>(`${this.apiUrl}/GetCurrentUser`, { headers })
+        .pipe(map((res) => res.Data))
+    );
+  }
+
+  // Create new user
+  async create(user: User): Promise<User> {
     const token = await this.authService.getToken();
     const headers = new HttpHeaders({
       Authorization: `Bearer ${token}`,
     });
     return firstValueFrom(
-      this.http.post<LeaveRequest>(`${this.apiUrl}/Create`, request, {
+      this.http.post<User>(`${this.apiUrl}/Create`, user, {
         headers,
       })
     );
-  }
-
-  // Update leave request
-  async update(request: LeaveRequest): Promise<LeaveRequest> {
-    const token = await this.authService.getToken();
-    const headers = new HttpHeaders({
-      Authorization: `Bearer ${token}`,
-    });
-    return firstValueFrom(
-      this.http.post<LeaveRequest>(`${this.apiUrl}/Update`, request, {
-        headers,
-      })
-    );
-  }
-
-  // Delete leave request
-  delete(id: number): Observable<any> {
-    const headers = new HttpHeaders({
-      Authorization: `Bearer ${this.authService.token}`,
-    });
-    return this.http.delete(`${this.apiUrl}/${id}`, { headers });
   }
 }

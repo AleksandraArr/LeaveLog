@@ -39,8 +39,8 @@
               label="Role"
               [formControl]="formGroupControls.UserType"
             >
-              <ion-select-option value="admin">Admin</ion-select-option>
-              <ion-select-option value="user">User</ion-select-option>
+              <ion-select-option [value]="1">Admin</ion-select-option>
+              <ion-select-option [value]="2">User</ion-select-option>
             </ion-select>
           </ion-item>
           <ion-item>
@@ -49,17 +49,15 @@
               label="Position"
               [formControl]="formGroupControls.UserPosition"
             >
-              <ion-select-option value="CEO">CEO</ion-select-option>
-              <ion-select-option value="ProjectManager"
-                >Project Manager</ion-select-option
-              >
-              <ion-select-option value="BackendDeveloper"
+              <ion-select-option [value]="1">CEO</ion-select-option>
+              <ion-select-option [value]="2">Project Manager</ion-select-option>
+              <ion-select-option [value]="3"
                 >Backend Developer</ion-select-option
               >
-              <ion-select-option value="FrontendDeveloper"
+              <ion-select-option [value]="4"
                 >Frontend Developer</ion-select-option
               >
-              <ion-select-option value="QA">QA</ion-select-option>
+              <ion-select-option [value]="5">QA</ion-select-option>
             </ion-select>
           </ion-item>
         </ion-list>

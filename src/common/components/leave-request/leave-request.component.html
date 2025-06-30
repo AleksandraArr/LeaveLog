@@ -30,21 +30,30 @@
       </ion-row>
       <hr />
       <ion-row>
-        <ion-col class="label-col">User:</ion-col>
-        <ion-col class="value-col">{{
-          users | userFullName : leaveRequest.CreatedBy
-        }}</ion-col>
-      </ion-row>
-      <hr />
-      <ion-row>
         <ion-col class="label-col">Status:</ion-col>
         <ion-col class="value-col">{{
           leaveRequest.Status | leaveRequestStatusToString
         }}</ion-col>
       </ion-row>
+      <hr *ngIf="leaveRequest.Status !== 1" />
+      <ion-row *ngIf="leaveRequest.Status !== 1">
+        <ion-col class="label-col">Comment:</ion-col>
+        <ion-col class="value-col">{{ leaveRequest.Comment }}</ion-col>
+      </ion-row>
+      <hr *ngIf="leaveRequest.Status !== 1" />
+      <ion-row *ngIf="leaveRequest.Status !== 1">
+        <ion-col class="label-col">Reviewed by:</ion-col>
+        <ion-col class="value-col">{{
+          users | userFullName : leaveRequest.UpdatedBy
+        }}</ion-col>
+      </ion-row>
     </ion-grid>
     <ion-buttons>
-      <ion-button color="transparent" [attr.id]="'delete-' + leaveRequest.Id">
+      <ion-button
+        color="transparent"
+        [attr.id]="'delete-' + leaveRequest.Id"
+        *ngIf="leaveRequest.Status === 1"
+      >
         <ion-icon slot="icon-only" name="trash"></ion-icon>
       </ion-button>
       <ion-alert
@@ -52,8 +61,13 @@
         class="custom-alert"
         header="Are you sure you want to delete leave request?"
         [buttons]="alertButtons"
+        *ngIf="leaveRequest.Status === 1"
       ></ion-alert>
-      <ion-button color="transparent" (click)="onClick()">
+      <ion-button
+        color="transparent"
+        (click)="onClick()"
+        *ngIf="leaveRequest.Status === 1"
+      >
         <ion-icon slot="icon-only" name="pencil"></ion-icon>
       </ion-button>
     </ion-buttons>

@@ -19,6 +19,22 @@ export function StatusToString(value: Status): string {
       return 'Uknown status';
   }
 }
+export function LeaveErrorCodeToMessage(errorCode: string): string {
+  switch (errorCode) {
+    case 'leave_request_maximum_days_violated':
+      return 'You have selected more than the maximum number of days.';
+    case 'leave_request_not_enough_days':
+      return 'You do not have enough leave days.';
+    case 'leave_request_already_processed':
+      return 'The leave request has already been processed.';
+    case 'leave_request_too_late':
+      return 'You submitted the leave request too late.';
+    case 'cmd_validation_error':
+      return 'You have entered invalid dates.';
+    default:
+      return 'Failed to create leave request, please try again.';
+  }
+}
 export class LeaveRequest {
   Id: number;
   LeaveTypeId: number;

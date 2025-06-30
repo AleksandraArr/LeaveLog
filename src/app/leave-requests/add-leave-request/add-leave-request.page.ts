@@ -1,7 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { LeaveRequest } from 'src/common/models/leave-request.model';
-import { ConnectedDays, LeaveType } from 'src/common/models/leave-type.model';
+import {
+  LeaveErrorCodeToMessage,
+  LeaveRequest,
+} from 'src/common/models/leave-request.model';
+import { LeaveType } from 'src/common/models/leave-type.model';
+import { LeaveRequestApiService } from 'src/common/services/leave-request-api.service';
+import { LeaveTypeApiService } from 'src/common/services/leave-type-api.service';
+import { ToastService } from 'src/common/services/toast.service';
 
 @Component({
   selector: 'app-add-leave-request',
@@ -11,11 +17,7 @@ import { ConnectedDays, LeaveType } from 'src/common/models/leave-type.model';
 })
 export class AddLeaveRequestPage implements OnInit {
   leaveRequest: LeaveRequest = new LeaveRequest();
-  leaveTypes: LeaveType[] = [
-    new LeaveType(1, 'Sick day', ConnectedDays.SickDay, 0, 2),
-    new LeaveType(2, 'Vacation', ConnectedDays.VacationDay, 20, 10),
-    new LeaveType(3, 'Personal day', ConnectedDays.VacationDay, 3, 5),
-  ];
+  leaveTypes: LeaveType[] = [];
   public formGroupControls = {
     LeaveTypeId: new FormControl<number | null>(null, Validators.required),
     Description: new FormControl<string | null>(null, Validators.required),
@@ -23,10 +25,23 @@ export class AddLeaveRequestPage implements OnInit {
     DateTo: new FormControl<string | null>(null, Validators.required),
   };
   public formGroup = new FormGroup(this.formGroupControls);
-  constructor() {}
+  constructor(
+    private leaveRequestApiService: LeaveRequestApiService,
+    private leaveTypeApiService: LeaveTypeApiService,
+    private toastService: ToastService
+  ) {}
 
-  ngOnInit() {}
-
+  ngOnInit() {
+    this.loadLeaveTypes();
+  }
+  async loadLeaveTypes() {
+    try {
+      const leaveTypes = await this.leaveTypeApiService.getAll();
+      this.leaveTypes = leaveTypes;
+    } catch (error) {
+      console.error('Error loading leave types', error);
+    }
+  }
   public get canSubmit(): boolean {
     return this.formGroup.valid;
   }
@@ -35,6 +50,21 @@ export class AddLeaveRequestPage implements OnInit {
     this.leaveRequest.Description = this.formGroupControls.Description.value!;
     this.leaveRequest.DateFrom = this.formGroupControls.DateFrom.value!;
     this.leaveRequest.DateTo = this.formGroupControls.DateTo.value!;
-    console.log(this.leaveRequest);
+    try {
+      const createdRequest = await this.leaveRequestApiService.create(
+        this.leaveRequest
+      );
+      this.toastService.presentToast(
+        'Leave request succesfully created',
+        'success'
+      );
+    } catch (err: any) {
+      const code = err?.error?.Errors?.[0]?.Code;
+      const message = LeaveErrorCodeToMessage(code);
+      this.toastService.presentToast(
+        `Error while creating leave request. ${message}`,
+        'danger'
+      );
+    }
   }
 }

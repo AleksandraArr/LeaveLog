@@ -4,7 +4,7 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
+<ion-content [fullscreen]="true" *ngIf="!isLoading">
   <app-user-info [user]="user"></app-user-info>
   <ion-button shape="round" (click)="logout()">Logout</ion-button>
 </ion-content>

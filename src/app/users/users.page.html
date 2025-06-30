@@ -1,6 +1,9 @@
 <app-header title="Users"></app-header>
 
 <ion-content [fullscreen]="true">
+  <ion-refresher slot="fixed" (ionRefresh)="handleRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
   <ion-button shape="round" routerLink="add-user">Add user</ion-button>
   <div *ngFor="let user of users">
     <app-user-info [user]="user"></app-user-info>

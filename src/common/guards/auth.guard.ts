@@ -8,15 +8,22 @@ import { map } from 'rxjs/operators';
 export class AuthGuard implements CanActivate {
   constructor(private authService: AuthService, private router: Router) {}
 
-  canActivate(): Observable<boolean | UrlTree> {
-    return this.authService.isAuthenticated.pipe(
-      map((isAuth) => {
-        if (isAuth) {
-          return true;
-        } else {
-          return this.router.createUrlTree(['/auth/login']);
-        }
-      })
-    );
+  async canActivate(): Promise<boolean | UrlTree> {
+    // return this.authService.isAuthenticated.pipe(
+    //   map((isAuth) => {
+    //     if (isAuth) {
+    //       return true;
+    //     } else {
+    //       return this.router.createUrlTree(['/auth/login']);
+    //     }
+    //   })
+    // );
+
+    const isAuth = await this.authService.getisAuthenticated();
+    if (isAuth) {
+      return true;
+    } else {
+      return this.router.createUrlTree(['/auth/login']);
+    }
   }
 }

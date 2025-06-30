@@ -1,12 +1,16 @@
 <app-header title="All leave requests"></app-header>
 <ion-content [fullscreen]="true">
+  <ion-refresher slot="fixed" (ionRefresh)="handleRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
   <ion-button shape="round" routerLink="add-leave-request"
     >Add request</ion-button
   >
   <div *ngFor="let leaveRequest of leaveRequests">
     <app-leave-request
       [leaveRequest]="leaveRequest"
-      (clicked)="navigateToRequest(leaveRequest.Id)"
+      [users]="users"
+      [leaveTypes]="leaveTypes"
     ></app-leave-request>
   </div>
 </ion-content>

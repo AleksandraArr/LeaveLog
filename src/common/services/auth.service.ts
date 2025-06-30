@@ -16,10 +16,11 @@ const ACCESS_TOKEN = 'my-token';
   providedIn: 'root',
 })
 export class AuthService {
-  isAuthenticated: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(
-    false
-  );
+  // isAuthenticated: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(
+  //   false
+  // );
   token = '';
+  isAuthenticated: boolean | null = null;
 
   constructor(private http: HttpClient) {
     this.loadToken();
@@ -30,9 +31,9 @@ export class AuthService {
     if (value) {
       console.log('set token: ', value);
       this.token = value;
-      this.isAuthenticated.next(true);
+      this.isAuthenticated = true;
     } else {
-      this.isAuthenticated.next(false);
+      this.isAuthenticated = false;
     }
   }
   async getToken(): Promise<string> {
@@ -40,6 +41,12 @@ export class AuthService {
       await this.loadToken();
     }
     return this.token;
+  }
+  async getisAuthenticated(): Promise<boolean | null> {
+    if (this.isAuthenticated == null) {
+      await this.loadToken();
+    }
+    return this.isAuthenticated;
   }
 
   login(credentials: { Email: string; Password: string }): Observable<any> {
@@ -55,14 +62,11 @@ export class AuthService {
           this.token = token;
           return from(Preferences.set({ key: ACCESS_TOKEN, value: token }));
         }),
-        tap(() => {
-          this.isAuthenticated.next(true);
-        })
+        tap(() => {})
       );
   }
 
   logout(): Promise<void> {
-    this.isAuthenticated.next(false);
     this.token = '';
     return Preferences.remove({ key: ACCESS_TOKEN });
   }

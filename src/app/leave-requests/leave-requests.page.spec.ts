@@ -1,8 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { IonicModule } from '@ionic/angular';
 
-import { ExploreContainerComponentModule } from '../explore-container/explore-container.module';
-
 import { LeaveRequestsPage } from './leave-requests.page';
 
 describe('LeaveRequestsPage', () => {
@@ -12,7 +10,7 @@ describe('LeaveRequestsPage', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [LeaveRequestsPage],
-      imports: [IonicModule.forRoot(), ExploreContainerComponentModule],
+      imports: [IonicModule.forRoot()],
     }).compileComponents();
 
     fixture = TestBed.createComponent(LeaveRequestsPage);

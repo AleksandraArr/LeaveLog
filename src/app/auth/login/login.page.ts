@@ -39,7 +39,7 @@ export class LoginPage implements OnInit {
     this.authService.login(credentials).subscribe({
       next: () => {
         this.toastService.presentToast('Logged in successfully.', 'success');
-        this.router.navigateByUrl('leave-requests');
+        this.router.navigateByUrl('/leave-requests');
       },
       error: (err) => {
         const code = err?.error?.Errors?.[0]?.Code;

@@ -37,17 +37,26 @@
 @import "@ionic/angular/css/palettes/dark.system.css";
 
 ion-button {
+  flex: 1; /* ravnomerno zauzimanje prostora */
+  margin: 10px 8px; /* horizontalni razmak između dugmadi */
+  box-sizing: border-box; /* da padding i border računaju u širinu */
+
   --border-radius: 20px;
   --padding-top: 12px;
   --padding-bottom: 12px;
   --padding-start: 24px;
   --padding-end: 24px;
-  margin: 16px;
-  width: 180px;
   letter-spacing: 1.5px;
+
   --background: #3e5879;
   --background-activated: #213555;
 }
+ion-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+}
+
 ion-toolbar {
   height: 60px;
 }
@@ -92,4 +101,16 @@ ion-item {
 }
 .custom-toast {
   color: (--ion-color-white);
+}
+ion-backdrop {
+  opacity: 0 !important;
+  background: var(--ion-background-color);
+}
+.loading-wrapper.sc-ion-loading-md {
+  box-shadow: none;
+  background: var(--ion-background-color);
+}
+ion-alert .alert-button-group {
+  justify-content: center !important;
+  gap: 1rem; /* razmak između dugmića */
 }

@@ -40,7 +40,7 @@ export class LeaveRequestsPage implements OnInit {
         this.loadLeaveTypes(),
       ]);
     } catch (err) {
-      this.toastService.presentToast('Failed to load users', 'danger');
+      this.toastService.presentToast('Failed to load', 'danger');
     } finally {
       await loading.dismiss();
     }

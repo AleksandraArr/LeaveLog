@@ -5,6 +5,21 @@
 </ion-header>
 
 <ion-content [fullscreen]="true" *ngIf="!isLoading">
-  <app-user-info [user]="user"></app-user-info>
+  <ion-segment value="user" [(ngModel)]="segment">
+    <ion-segment-button value="info">
+      <ion-label>Information</ion-label>
+    </ion-segment-button>
+    <ion-segment-button value="days">
+      <ion-label>Days off</ion-label>
+    </ion-segment-button>
+  </ion-segment>
+  <div [ngSwitch]="segment">
+    <app-user-info [user]="user" *ngSwitchCase="'info'"></app-user-info>
+
+    <app-user-days-off
+      [userDaysOff]="userDaysOff"
+      *ngSwitchCase="'days'"
+    ></app-user-days-off>
+  </div>
   <ion-button shape="round" (click)="logout()">Logout</ion-button>
 </ion-content>

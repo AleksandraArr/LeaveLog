@@ -66,6 +66,13 @@ ion-toolbar ion-title {
   line-height: 40px;
   font-size: 1.5rem;
 }
+ion-progress-bar {
+  position: absolute;
+  top: 60px;
+  left: 0;
+  right: 0;
+  z-index: 10;
+}
 ion-back-button {
   height: 60px;
 }
@@ -112,5 +119,22 @@ ion-backdrop {
 }
 ion-alert .alert-button-group {
   justify-content: center !important;
-  gap: 1rem; /* razmak između dugmića */
+  gap: 1rem;
+}
+ion-segment-button {
+  --indicator-color: var(--ion-color-primary);
+}
+
+/* Material Design styles */
+ion-segment-button.md {
+  --color: #000;
+  --color-checked: var(--ion-color-primary);
+  --indicator-height: 4px;
+}
+
+/* iOS styles */
+ion-segment-button.ios {
+  --color: var(--ion-color-primary);
+  --color-checked: #fff;
+  --border-radius: 20px;
 }

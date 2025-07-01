@@ -1,4 +1,8 @@
-<app-header title="Edit leave request" back="leave-requests"></app-header>
+<app-header
+  title="Edit leave request"
+  back="leave-requests"
+  [isLoading]="isLoading"
+></app-header>
 
 <ion-content [fullscreen]="true">
   <form class="form" [formGroup]="formGroup" (ngSubmit)="onSubmit()">

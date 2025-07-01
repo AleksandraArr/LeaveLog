@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { LoadingController } from '@ionic/angular';
-import { User, UserPosition, UserType } from 'src/common/models/user.model';
-import { LeaveRequestApiService } from 'src/common/services/leave-request-api.service';
-import { LeaveTypeApiService } from 'src/common/services/leave-type-api.service';
+import { User } from 'src/common/models/user.model';
 import { ToastService } from 'src/common/services/toast.service';
 import { UserApiService } from 'src/common/services/user-api.service';
 

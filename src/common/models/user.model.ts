@@ -57,6 +57,8 @@ export function UserErrorCodeToMessage(errorCode: string): string {
       return 'Invalid credentials.';
     case 'invalid_credentials':
       return 'Invalid credentials.';
+    case 'email_already_taken':
+      return 'Email is already in use.';
     default:
       return 'An error occurred. Please try again.';
   }

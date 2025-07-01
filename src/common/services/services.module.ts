@@ -5,6 +5,7 @@ import { LeaveTypeApiService } from './leave-type-api.service';
 import { AuthService } from './auth.service';
 import { UserApiService } from './user-api.service';
 import { ToastService } from './toast.service';
+import { UserDaysOffApiService } from './user-days-off-api.service';
 
 @NgModule({
   imports: [HttpClientModule],
@@ -15,6 +16,7 @@ import { ToastService } from './toast.service';
     AuthService,
     UserApiService,
     ToastService,
+    UserDaysOffApiService,
   ],
 })
 export class ServicesModule {}

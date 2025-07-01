@@ -18,6 +18,7 @@ import { ToastService } from 'src/common/services/toast.service';
 export class AddLeaveRequestPage implements OnInit {
   leaveRequest: LeaveRequest = new LeaveRequest();
   leaveTypes: LeaveType[] = [];
+  isLoading = false;
   public formGroupControls = {
     LeaveTypeId: new FormControl<number | null>(null, Validators.required),
     Description: new FormControl<string | null>(null, Validators.required),
@@ -46,6 +47,7 @@ export class AddLeaveRequestPage implements OnInit {
     return this.formGroup.valid;
   }
   public async onSubmit(): Promise<void> {
+    this.isLoading = true;
     this.leaveRequest.LeaveTypeId = this.formGroupControls.LeaveTypeId.value!;
     this.leaveRequest.Description = this.formGroupControls.Description.value!;
     this.leaveRequest.DateFrom = this.formGroupControls.DateFrom.value!;
@@ -58,7 +60,9 @@ export class AddLeaveRequestPage implements OnInit {
         'Leave request succesfully created',
         'success'
       );
+      this.isLoading = false;
     } catch (err: any) {
+      this.isLoading = false;
       const code = err?.error?.Errors?.[0]?.Code;
       const message = LeaveErrorCodeToMessage(code);
       this.toastService.presentToast(

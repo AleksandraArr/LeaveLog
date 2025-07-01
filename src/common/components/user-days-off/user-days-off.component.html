@@ -1,0 +1,27 @@
+<ion-card>
+  <ion-card-content>
+    <ion-grid>
+      <ion-row>
+        <ion-col class="label-col">Vacation days:</ion-col>
+        <ion-col class="value-col">{{ userDaysOff.VacationDays }}</ion-col>
+      </ion-row>
+      <hr />
+      <ion-row>
+        <ion-col class="label-col">Last year vacation days:</ion-col>
+        <ion-col class="value-col">{{
+          userDaysOff.LastYearVacationDays
+        }}</ion-col>
+      </ion-row>
+      <hr />
+      <ion-row>
+        <ion-col class="label-col">Sick days:</ion-col>
+        <ion-col class="value-col">{{ userDaysOff.SickDays }}</ion-col>
+      </ion-row>
+      <hr />
+      <ion-row>
+        <ion-col class="label-col">Bonus days:</ion-col>
+        <ion-col class="value-col">{{ userDaysOff.BonusDays }}</ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-card-content>
+</ion-card>

@@ -19,7 +19,7 @@ export class UserApiService {
   constructor(private http: HttpClient, private authService: AuthService) {
     this.authService.loadToken();
   }
-  // Get all leave requests
+  // Get all users
   async getAll(): Promise<User[]> {
     const token = await this.authService.getToken();
     const headers = new HttpHeaders({

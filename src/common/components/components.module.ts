@@ -7,6 +7,7 @@ import { PipesModule } from '../pipes/pipes.module';
 import { UserInfoComponent } from './user-info/user-info.component';
 import { LeaveRequestComponent } from './leave-request/leave-request.component';
 import { ServicesModule } from '../services/services.module';
+import { UserDaysOffComponent } from './user-days-off/user-days-off.component';
 
 @NgModule({
   declarations: [
@@ -14,6 +15,7 @@ import { ServicesModule } from '../services/services.module';
     UserAvatarComponent,
     UserInfoComponent,
     LeaveRequestComponent,
+    UserDaysOffComponent,
   ],
   imports: [CommonModule, IonicModule, PipesModule, ServicesModule],
   exports: [
@@ -21,6 +23,7 @@ import { ServicesModule } from '../services/services.module';
     UserAvatarComponent,
     UserInfoComponent,
     LeaveRequestComponent,
+    UserDaysOffComponent,
   ],
 })
 export class ComponentsModule {}

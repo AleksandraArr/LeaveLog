@@ -1,4 +1,4 @@
-<app-header title="Add user" back="users"></app-header>
+<app-header title="Add user" back="users" [isLoading]="isLoading"></app-header>
 
 <ion-content [fullscreen]="true">
   <form class="form" [formGroup]="formGroup" (ngSubmit)="onSubmit()">
@@ -63,6 +63,8 @@
         </ion-list>
       </ion-card-content>
     </ion-card>
-    <ion-button shape="round" type="submit">Add user</ion-button>
+    <ion-button shape="round" type="submit" [disabled]="!canSubmit"
+      >Add user</ion-button
+    >
   </form>
 </ion-content>

@@ -9,4 +9,5 @@ import { Component, Input } from '@angular/core';
 export class HeaderComponent {
   @Input() title: string | null = null;
   @Input() back: string = '';
+  @Input() isLoading: boolean = false;
 }

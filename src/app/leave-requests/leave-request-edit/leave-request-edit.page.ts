@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import {
+  LeaveErrorCodeToMessage,
   LeaveRequest,
   Status,
   StatusToString,
@@ -20,6 +21,7 @@ import { ToastService } from 'src/common/services/toast.service';
 export class LeaveRequestEditPage implements OnInit {
   leaveRequest: LeaveRequest = new LeaveRequest();
   leaveTypes: LeaveType[] = [];
+  isLoading = false;
   constructor(
     private activatedRoute: ActivatedRoute,
     private leaveTypeApiService: LeaveTypeApiService,
@@ -29,7 +31,12 @@ export class LeaveRequestEditPage implements OnInit {
     this.loadLeaveTypes();
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.formGroup.valueChanges.subscribe(() => {
+      this.hasFormChanged;
+      this.canSubmit;
+    });
+  }
   ngAfterViewInit(): void {
     this.activatedRoute.data.subscribe((data) => {
       this.leaveRequest = data['leaveRequest'] as LeaveRequest;
@@ -45,9 +52,19 @@ export class LeaveRequestEditPage implements OnInit {
   public formGroup = new FormGroup(this.formGroupControls);
 
   public get canSubmit(): boolean {
-    return this.formGroup.valid;
+    return this.formGroup.valid && this.hasFormChanged;
+  }
+  private get hasFormChanged(): boolean {
+    return (
+      this.leaveRequest.LeaveTypeId !==
+        this.formGroupControls.LeaveTypeId.value ||
+      this.leaveRequest.DateFrom !== this.formGroupControls.DateFrom.value ||
+      this.leaveRequest.DateTo !== this.formGroupControls.DateTo.value ||
+      this.leaveRequest.Description !== this.formGroupControls.Description.value
+    );
   }
   public async onSubmit(): Promise<void> {
+    this.isLoading = true;
     this.leaveRequest.LeaveTypeId = this.formGroupControls.LeaveTypeId.value!;
     this.leaveRequest.Description = this.formGroupControls.Description.value!;
     this.leaveRequest.DateFrom = this.formGroupControls.DateFrom.value!;
@@ -60,9 +77,14 @@ export class LeaveRequestEditPage implements OnInit {
         'Leave request succesfully created',
         'success'
       );
-    } catch (error) {
+
+      this.isLoading = false;
+    } catch (err: any) {
+      this.isLoading = false;
+      const code = err?.error?.Errors?.[0]?.Code;
+      const message = LeaveErrorCodeToMessage(code);
       this.toastService.presentToast(
-        'Error while creating leave request.',
+        `Error while creating leave request. ${message}`,
         'danger'
       );
     }
